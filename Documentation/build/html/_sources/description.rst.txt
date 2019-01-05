@@ -1,0 +1,70 @@
+
+Description
+===========
+
+How to use the program:
+
+
+
+#. после того, как загрузили исходные данные запускаете программу (файл "book sorting.txt")
+#. Программа выводит следующие данные:
+#. количество слов в анализируемом файле:
+    Всего слов в отрывке:  53113
+
+
+
+
+
+
+
+#. количество слов, которые еще не распределены в файл stopwords.txt или в файл
+#. "for_Anki_words.txt":
+    Количество необработанных слов в отрывке:  1791
+
+#. отношение того что уже обработано к тому, что еще не обработано:
+    Процент проработки/знания лексики отрывка: 96.6279 %
+
+    Количество новых слов в лексической базе (во всех текстах) =   9328
+    Количество новых слов в отрывке 1790
+
+#. После чего предлагается либо обработать слова из всех текстов (лексической базы),
+#. либо пропустить этот этап, нажав клавишу Enter:
+    Если Вы хотите обработать слова из (всех текстов)   - введите   y,
+                                                        - если не хотите - нажмите Enter:
+
+#. В случае, если была нажата клавиша Enter - предлагается обработать слова из отрывка (файл book_textfile_reading_now.txt), для обработки необходимо нажать клавишу 'y' или выйти из программы - клавишу Enter:
+
+    Если Вы хотите обработать слова       (из отрывка)
+                                                            - введите   y,
+                                                            - если не хотите - нажмите Enter:
+
+#. В случае, если Вы нажали 'y' выводится следующая информация:
+    Добавить слово в стоп слова - Enter, в словарь для изучения - d, пропустить слово -p
+
+#. После чего начинают выводиться слова для обработки:
+    8   -   eagerness   -  осталось слов: 1790 ,  встречаемость общая:  6 , в данном отрывке:  2 :  (тут необходимо нажать соответствующую клавишу ('y' или 'Enter')
+
+#. Если слово добавлено в стоп слова - это значит, что Вы его знаете и оно больше не будет выводиться при анализе этого и последующих текстов(при условии, что для других текстов Вы сохраните содержимое файла stopwords.txt )
+
+#. Если выбрано 'd' - слово будет добавлено в файл "for_Anki_words.txt" для последующего изучения
+
+#. Если Вам необходимо пропустить слово - Вы можете выбрать клавишу 'p' в этом случае слово не будет добавлено ни в stopwords.txt ни в "for_Anki_words.txt" и будет показано повторно при последующем запуске программы.
+
+
+
+ .. note:: *Anki software*
+
+
+    **We recommend you to use Anki software for memorization new words**
+
+    "Anki is a free and open-source spaced repetition flashcard program.
+    "Anki" (暗記) is the Japanese word for "memorization".
+    The SM2 algorithm, created for SuperMemo in the late 1980s, forms the basis of the spaced repetition methods
+    employed in the program.
+    Anki's implementation of the algorithm has been modified to allow priorities on cards and to show cards
+    in order of their urgency.
+    The cards are presented using HTML and may include text, images, sounds, videos, and LaTeX equations.
+    The decks of cards, along with the user's statistics, are stored in the open SQLite format. "
+
+   .. figure:: http://upload.wikimedia.org/wikipedia/commons/f/f6/Wikipedia-logo-v2-ru.png
+

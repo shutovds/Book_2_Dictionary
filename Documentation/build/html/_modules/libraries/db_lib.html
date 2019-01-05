@@ -1,0 +1,826 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>libraries.db_lib &#8212; Dictionary_from_text 1 documentation</title>
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../program_documentation.html">Dictionary_from_text 1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for libraries.db_lib</h1><div class="highlight"><pre>
+<span></span><span class="c1"># This Python file uses the following encoding: utf-8</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module includes all classes for processing database requests:</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">wraps</span>
+
+
+<span class="c1"># decorator for connection to DB</span>
+<div class="viewcode-block" id="connection_to_db"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.connection_to_db">[docs]</a><span class="k">def</span> <span class="nf">connection_to_db</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This decorator provides connection to database for all functions and close connection after</span>
+<span class="sd">    function made requests</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wrapper</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">db_name</span> <span class="o">=</span> <span class="s1">&#39;./settings/objects.sqlite&#39;</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">db_name</span><span class="p">))</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+<div class="viewcode-block" id="create_new_tables"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.create_new_tables">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">create_new_tables</span><span class="p">(</span><span class="n">cur</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create next tables:</span>
+<span class="sd">     * Anki - contain words imported from Anki</span>
+<span class="sd">     * Book - contain imported book: text and name</span>
+<span class="sd">     * BookToWord - set connection for book name, word and frequency, provide many to many</span>
+<span class="sd">     relation for tables Book и Words</span>
+<span class="sd">     * Words - contain imported words from all books</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">executescript</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        DROP TABLE IF EXISTS Anki;</span>
+<span class="s1">        DROP TABLE IF EXISTS Book;</span>
+<span class="s1">        DROP TABLE IF EXISTS BookToWord;</span>
+<span class="s1">        DROP TABLE IF EXISTS StopWords;</span>
+<span class="s1">        DROP TABLE IF EXISTS Words;</span>
+<span class="s1">        DROP TABLE IF EXISTS Dictionaries;</span>
+<span class="s1">        DROP TABLE IF EXISTS DictionariesToWord</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+
+        <span class="n">cur</span><span class="o">.</span><span class="n">executescript</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        CREATE TABLE Anki(</span>
+<span class="s1">                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,</span>
+<span class="s1">                front TEXT NOT NULL,</span>
+<span class="s1">                transcription TEXT,</span>
+<span class="s1">                translation TEXT,</span>
+<span class="s1">                sound TEXT,</span>
+<span class="s1">                example TEXT,</span>
+<span class="s1">                synonim TEXT</span>
+<span class="s1">            );</span>
+<span class="s1">        CREATE TABLE Book(</span>
+<span class="s1">                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,</span>
+<span class="s1">                book_name TEXT UNIQUE NOT NULL,</span>
+<span class="s1">                import_date_time TEXT,</span>
+<span class="s1">                author TEXT,</span>
+<span class="s1">                text TEXT,</span>
+<span class="s1">                comment TEXT</span>
+<span class="s1">            );</span>
+<span class="s1">        </span>
+<span class="s1">        CREATE TABLE BookToWord(</span>
+<span class="s1">                book_id INTEGER NOT NULL,</span>
+<span class="s1">                word_id INTEGER NOT NULL,</span>
+<span class="s1">                quantity INTEGER, /* TEXT */ </span>
+<span class="s1">                PRIMARY KEY(book_id, word_id)</span>
+<span class="s1">            );</span>
+<span class="s1">            </span>
+<span class="s1">        /* в таблицу Words было добавлено поле condition  */      </span>
+<span class="s1">        /* CREATE TABLE StopWords(</span>
+<span class="s1">                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,</span>
+<span class="s1">                front TEXT UNIQUE NOT NULL,</span>
+<span class="s1">                comment TEXT </span>
+<span class="s1">            ); */</span>
+<span class="s1">        </span>
+<span class="s1">        CREATE TABLE Words(</span>
+<span class="s1">                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,</span>
+<span class="s1">                front TEXT UNIQUE NOT NULL,</span>
+<span class="s1">                transcription TEXT,</span>
+<span class="s1">                translation TEXT,</span>
+<span class="s1">                comments TEXT,</span>
+<span class="s1">                condition TEXT, /* Already studed, studing, ignore, etc */</span>
+<span class="s1">                part_of_speech_tag TEXT</span>
+<span class="s1">            );</span>
+<span class="s1">        </span>
+<span class="s1">        CREATE TABLE Dictionaries(</span>
+<span class="s1">                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,</span>
+<span class="s1">                dic_name TEXT UNIQUE NOT NULL,</span>
+<span class="s1">                creation_date_time TEXT,</span>
+<span class="s1">                comment TEXT</span>
+<span class="s1">            );</span>
+<span class="s1">        </span>
+<span class="s1">        /* Dictionaries connected to Words and to Books */</span>
+<span class="s1">        CREATE TABLE DictionariesToWord(</span>
+<span class="s1">                dictionary_id INTEGER NOT NULL,</span>
+<span class="s1">                word_id INTEGER NOT NULL,</span>
+<span class="s1">                orders TEXT, /* порядковый номер слова в словаре */</span>
+<span class="s1">                PRIMARY KEY(dictionary_id, word_id)</span>
+<span class="s1">            );</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="anki_t_db"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.anki_t_db">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">anki_t_db</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Import data from Anki dictionary to table Anki DB</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">executescript</span><span class="p">(</span><span class="s1">&#39;delete from Anki&#39;</span><span class="p">)</span>  <span class="c1"># очищаем таблицу</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">rec</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">+</span> <span class="n">rec</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">:</span>
+                <span class="n">rec</span> <span class="o">=</span> <span class="n">rec</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">7</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)))</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">:</span>
+                <span class="n">rec</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span>
+
+            <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;INSERT OR IGNORE INTO Anki VALUES (?,?,?,?,?,?,?)&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">rec</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="book_t_db"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.book_t_db">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">book_t_db</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Import book from txt file to table Book DB</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">path</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">book_name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;INSERT OR IGNORE INTO Book (book_name, text)</span>
+<span class="s1">                       VALUES (?,?)&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">book_name</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="Words"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.Words">[docs]</a><span class="k">class</span> <span class="nc">Words</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create the dictionary of words for import words to DB</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word</span> <span class="o">=</span> <span class="n">word</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frequency</span> <span class="o">=</span> <span class="mi">1</span>
+
+<div class="viewcode-block" id="Words.set_to_dictionary"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.Words.set_to_dictionary">[docs]</a>    <span class="k">def</span> <span class="nf">set_to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create the dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">word</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frequency</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">word</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="n">dictionary</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">frequency</span><span class="p">,</span> <span class="p">]</span></div>
+
+<div class="viewcode-block" id="Words.length_of_dictionary"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.Words.length_of_dictionary">[docs]</a>    <span class="k">def</span> <span class="nf">length_of_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Count length of the word</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">word</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="words_from_book_2db"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.words_from_book_2db">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">words_from_book_2db</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function provides export from book to database</span>
+
+<span class="sd">    #. download text from table Book dictionary for processing</span>
+<span class="sd">    #. calculation the frequency for words in the book</span>
+<span class="sd">    #. deletion words repetitions</span>
+<span class="sd">    #. saving words to table Words and set relation in table BookToWord</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">book_name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># obtaining text from DB</span>
+        <span class="c1"># creating the dictionary based on the text</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT text FROM Book WHERE book_name = ?&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">book_name</span><span class="p">,))</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\W+|\d+&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="n">worddic</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="n">inst</span> <span class="o">=</span> <span class="n">Words</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+                <span class="n">inst</span><span class="o">.</span><span class="n">set_to_dictionary</span><span class="p">(</span><span class="n">worddic</span><span class="p">)</span>
+
+        <span class="c1"># downloading words from DB Words, creating the list of words</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT front FROM Words&#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">allwords</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">list_allwords</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">allwords</span><span class="p">:</span>
+            <span class="n">list_allwords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="c1"># obtaining Book ID</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM Book WHERE book_name = ? &#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">book_name</span><span class="p">,))</span>
+        <span class="n">book_id</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># comparing list from Book with list words from DB and changing data in DB</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">worddic</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">list_allwords</span><span class="p">:</span>
+                <span class="c1">#  word already in DB table Words</span>
+                <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM Words WHERE front = ? &#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">key</span><span class="p">,))</span>
+                <span class="n">word_id</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT OR IGNORE INTO BookToWord (book_id, word_id, quantity) &#39;</span>
+                            <span class="s1">&#39;VALUES (?,?,?)&#39;</span><span class="p">,</span>
+                            <span class="p">(</span><span class="n">book_id</span><span class="p">,</span> <span class="n">word_id</span><span class="p">,</span> <span class="n">worddic</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># word not yet in DB table Words</span>
+                <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT OR IGNORE INTO Words (front) VALUES (?)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">key</span><span class="p">,))</span>
+                <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM Words WHERE front = ? &#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">key</span><span class="p">,))</span>
+                <span class="n">word_id</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT OR IGNORE INTO BookToWord (book_id, word_id, quantity) &#39;</span>
+                            <span class="s1">&#39;VALUES (?,?,?)&#39;</span><span class="p">,</span>
+                            <span class="p">(</span><span class="n">book_id</span><span class="p">,</span> <span class="n">word_id</span><span class="p">,</span> <span class="n">worddic</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="create_dictionary"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.create_dictionary">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">create_dictionary</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create new user dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dictionary</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">comment</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">creation_date</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%a, </span><span class="si">%d</span><span class="s2"> %b %Y %H:%M:%S&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">gmtime</span><span class="p">())</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT OR IGNORE INTO  Dictionaries (dic_name, creation_date_time, comment) &#39;</span>
+                    <span class="s1">&#39;VALUES(?,?,?)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">creation_date</span><span class="p">,</span> <span class="n">comment</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="addword_2_dictionary"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.addword_2_dictionary">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">addword_2_dictionary</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add new word to dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dictionary</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM Dictionaries WHERE dic_name = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">dictionary</span><span class="p">,))</span>
+        <span class="n">dictionary_id</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM Words WHERE front = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">word</span><span class="p">,))</span>
+        <span class="n">word_id</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT COUNT(*) FROM DictionariesToWord&#39;</span><span class="p">)</span>
+        <span class="n">orders</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT OR IGNORE INTO DictionariesToWord (dictionary_id, word_id, orders) &#39;</span>
+                    <span class="s1">&#39;VALUES (?,?,?)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">dictionary_id</span><span class="p">,</span> <span class="n">word_id</span><span class="p">,</span> <span class="n">orders</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="check_word_exist"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.check_word_exist">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">check_word_exist</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Select that word exist</span>
+<span class="sd">    word = args[0]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM Words WHERE front = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],))</span>
+        <span class="k">return</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">except</span> <span class="p">(</span><span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="check_book_exist"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.check_book_exist">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">check_book_exist</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Select that book exist</span>
+<span class="sd">    book = args[0]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM Book WHERE book_name = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],))</span>
+        <span class="k">return</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">except</span> <span class="p">(</span><span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="check_dictionary_exist"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.check_dictionary_exist">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">check_dictionary_exist</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Select that dictionary exist</span>
+<span class="sd">    dictionary = args[0]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM Dictionaries WHERE dic_name = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],))</span>
+        <span class="k">return</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">except</span> <span class="p">(</span><span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="dell_word_from_dictionary"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.dell_word_from_dictionary">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">dell_word_from_dictionary</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Delete word from dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dictionary_id</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">word_id</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DELETE FROM DictionariesToWord &#39;</span>
+                    <span class="s1">&#39;WHERE word_id=? &#39;</span>
+                    <span class="s1">&#39;AND dictionary_id=?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">word_id</span><span class="p">,</span> <span class="n">dictionary_id</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">word_id</span>
+
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<span class="c1"># ------------------------------------------------------------------ Редактирование:</span>
+<div class="viewcode-block" id="change_word"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.change_word">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">change_word</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function provides changing the word</span>
+<span class="sd">    Fields that are possible to add</span>
+
+<span class="sd">    * front</span>
+<span class="sd">    * transcription</span>
+<span class="sd">    * translation</span>
+<span class="sd">    * comments</span>
+<span class="sd">    * condition</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">word</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id, front, transcription, translation, comments, condition &#39;</span>
+                <span class="s1">&#39;FROM Words &#39;</span>
+                <span class="s1">&#39;WHERE front = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">word</span><span class="p">,))</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    <span class="n">word_id</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;front&#39;</span><span class="p">,</span> <span class="s1">&#39;transcription&#39;</span><span class="p">,</span> <span class="s1">&#39;translation&#39;</span><span class="p">,</span> <span class="s1">&#39;comments&#39;</span><span class="p">,</span> <span class="s1">&#39;condition&#39;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;UPDATE Words &#39;</span>
+                        <span class="s1">&#39;SET front = ?, transcription = ?, translation = ?, comments = ?, &#39;</span>
+                        <span class="s1">&#39;condition = ? &#39;</span>
+                        <span class="s1">&#39;WHERE id = ?&#39;</span><span class="p">,</span>
+                        <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;front&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;transcription&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;translation&#39;</span><span class="p">],</span>
+                         <span class="n">data</span><span class="p">[</span><span class="s1">&#39;comments&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;condition&#39;</span><span class="p">],</span> <span class="n">word_id</span><span class="p">,))</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="rename_book"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.rename_book">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">rename_book</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rename the book</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">book_name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">new_name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;UPDATE Book SET book_name = ? &#39;</span>
+                    <span class="s1">&#39;WHERE book_name = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">new_name</span><span class="p">,</span> <span class="n">book_name</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="rename_dictionary"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.rename_dictionary">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">rename_dictionary</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rename the dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dictionary</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">new_name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;UPDATE Dictionaries SET dic_name = ? &#39;</span>
+                    <span class="s1">&#39;WHERE dic_name = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">new_name</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="list_dictionary"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.list_dictionary">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">list_dictionary</span><span class="p">(</span><span class="n">cur</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return list of existed dictionaries</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT dic_name FROM Dictionaries&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="list_books"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.list_books">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">list_books</span><span class="p">(</span><span class="n">cur</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function return the list of books in database</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT book_name, id, SUM(quantity) &#39;</span>
+                    <span class="s1">&#39;FROM Book, BookToWord &#39;</span>
+                    <span class="s1">&#39;WHERE BookToWord.book_id = Book.id &#39;</span>
+                    <span class="s1">&#39;GROUP BY BookToWord.book_id&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="del_word_from_words"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.del_word_from_words">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">del_word_from_words</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove word from table Words and connected tables</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">word_id</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DELETE FROM Words &#39;</span>
+                    <span class="s1">&#39;WHERE id = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">word_id</span><span class="p">,))</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DELETE FROM DictionariesToWord &#39;</span>
+                    <span class="s1">&#39;WHERE word_id=?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">word_id</span><span class="p">,))</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DELETE FROM BookToWord &#39;</span>
+                    <span class="s1">&#39;WHERE word_id=?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">word_id</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="del_book"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.del_book">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">del_book</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Delete book from Database the table Book and connected tables</span>
+<span class="sd">    (also delete the text of the book)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># /todo add words delete from the table Words if they are not in existing books</span>
+
+    <span class="n">book_id</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DELETE &#39;</span>
+                    <span class="s1">&#39;FROM Book &#39;</span>
+                    <span class="s1">&#39;WHERE id = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">book_id</span><span class="p">,))</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DELETE &#39;</span>
+                    <span class="s1">&#39;FROM BookToWord &#39;</span>
+                    <span class="s1">&#39;WHERE book_id=?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">book_id</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="del_dictionary"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.del_dictionary">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">del_dictionary</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove the dictionary from table Dictionaries and connected tables</span>
+<span class="sd">    (слова входившие в dictionary остаются в таблице Words до тех пор пока не будет удалена книга</span>
+<span class="sd">    либо они не будут удалены индивидуально)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dictionary_id</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DELETE &#39;</span>
+                    <span class="s1">&#39;FROM Dictionaries &#39;</span>
+                    <span class="s1">&#39;WHERE id = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">dictionary_id</span><span class="p">,))</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DELETE &#39;</span>
+                    <span class="s1">&#39;FROM DictionariesToWord &#39;</span>
+                    <span class="s1">&#39;WHERE dictionary_id=?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">dictionary_id</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<span class="c1"># Отображение:</span>
+
+
+<div class="viewcode-block" id="select_from_dictionary"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.select_from_dictionary">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">select_from_dictionary</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return words from dictionary</span>
+
+<span class="sd">    * dictionary=&quot;DictionarryName&quot;,</span>
+<span class="sd">    * order_field=&#39;quantity&#39;,</span>
+<span class="sd">    * order=&#39;DESC&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dictionary</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">order_field</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">sql_expression</span> <span class="o">=</span> <span class="s1">&#39;SELECT front, transcription, translation, comments, condition, &#39;</span> <span class="o">+</span> \
+                         <span class="s1">&#39;SUM(quantity) &#39;</span> <span class="o">+</span> \
+                         <span class="s1">&#39;FROM Words, Dictionaries, DictionariesToWord, BookToWord &#39;</span> <span class="o">+</span> \
+                         <span class="s1">&#39;WHERE Dictionaries.dic_name = ? &#39;</span> <span class="o">+</span> \
+                         <span class="s1">&#39;AND DictionariesToWord.dictionary_id = Dictionaries.id &#39;</span> <span class="o">+</span> \
+                         <span class="s1">&#39;AND Words.id = DictionariesToWord.word_id &#39;</span> <span class="o">+</span> \
+                         <span class="s1">&#39;AND BookToWord.word_id = Words.id &#39;</span> <span class="o">+</span> \
+                         <span class="s1">&#39;GROUP BY BookToWord.word_id &#39;</span> <span class="o">+</span> \
+                         <span class="s1">&#39;ORDER BY &#39;</span> <span class="o">+</span> <span class="n">order_field</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">order</span>
+
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_expression</span><span class="p">,</span> <span class="p">(</span><span class="n">dictionary</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="select_words_by_condition"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.select_words_by_condition">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">select_words_by_condition</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the words with condition mark from Words table</span>
+<span class="sd">    s - studded   condition=&#39;s&#39;</span>
+<span class="sd">    i - ignore</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">condition</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT front, transcription, translation, comments, condition &#39;</span>
+                    <span class="s1">&#39;FROM Words &#39;</span>
+                    <span class="s1">&#39;WHERE Words.condition = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">condition</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="select_book_words_with_condition"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.select_book_words_with_condition">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">select_book_words_with_condition</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the list of the words based on the Book (in frequency order, except Ignore)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">book_name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">condition1</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">condition2</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="c1"># order = args[3]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT front, transcription, translation, comments, condition, quantity &#39;</span>
+                    <span class="s1">&#39;FROM Book, Words, BookToWord &#39;</span>
+                    <span class="s1">&#39;WHERE BookToWord.book_id = Book.id &#39;</span>
+                    <span class="s1">&#39;AND Words.id = BookToWord.word_id &#39;</span>
+                    <span class="s1">&#39;AND Words.id NOT IN (SELECT word_id FROM DictionariesToWord) &#39;</span>
+                    <span class="s1">&#39;AND Book.book_name = ? &#39;</span>
+                    <span class="s1">&#39;AND (Words.condition IS NULL OR Words.condition &lt;&gt; ?) &#39;</span>
+                    <span class="s1">&#39;AND (Words.condition IS NULL OR Words.condition &lt;&gt; ?) &#39;</span>
+                    <span class="s1">&#39;ORDER BY quantity DESC&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">book_name</span><span class="p">,</span> <span class="n">condition1</span><span class="p">,</span> <span class="n">condition2</span><span class="p">,))</span>
+
+        <span class="k">return</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="select_dictionary_words_with_condition"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.select_dictionary_words_with_condition">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">select_dictionary_words_with_condition</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Выводим список слов на основе словаря</span>
+<span class="sd">    отсеиваем слова по:</span>
+
+<span class="sd">    * condition1=&#39;i&#39;</span>
+<span class="sd">    * condition2=&#39;s&#39;</span>
+
+<span class="sd">    упорядочиваем по убыванию:</span>
+<span class="sd">    * order=&#39;quantity&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dictionary</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># &quot;DictionarryName&quot;</span>
+    <span class="n">condition1</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># &#39;&#39;,</span>
+    <span class="n">condition2</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># &#39;&#39;, \</span>
+    <span class="c1"># order = args[3]       # &#39;quantity&#39;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT front, transcription, translation, comments, condition, quantity &#39;</span>
+                    <span class="s1">&#39;FROM Dictionaries, Words, DictionariesToWord, BookToWord &#39;</span>
+                    <span class="s1">&#39;WHERE DictionariesToWord.dictionary_id = Dictionaries.id &#39;</span>
+                    <span class="s1">&#39;AND Words.id = DictionariesToWord.word_id &#39;</span>
+                    <span class="s1">&#39;AND Dictionaries.dic_name = ? &#39;</span>
+                    <span class="s1">&#39;AND (Words.condition IS NULL OR Words.condition &lt;&gt; ?)&#39;</span>
+                    <span class="s1">&#39;AND (Words.condition IS NULL OR Words.condition &lt;&gt; ?)&#39;</span>
+                    <span class="s1">&#39;AND BookToWord.word_id = Words.id &#39;</span>
+                    <span class="s1">&#39;ORDER BY quantity DESC&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">condition1</span><span class="p">,</span> <span class="n">condition2</span><span class="p">,))</span>
+
+        <span class="k">return</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="select_all_words_with_condition"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.select_all_words_with_condition">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">select_all_words_with_condition</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the list of words from DB Words table (except Ignore)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># book_name = args[0]</span>
+    <span class="n">condition</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>    <span class="c1"># &#39;i&#39;</span>
+    <span class="n">order_field</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># &#39;quantity&#39;,</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>        <span class="c1"># &#39;DESC&#39;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">sql_expression</span> <span class="o">=</span> <span class="s1">&#39;SELECT front, transcription, translation, comments, &#39;</span> <span class="o">+</span> \
+                         <span class="s1">&#39;condition, quantity &#39;</span> <span class="o">+</span> \
+                         <span class="s1">&#39;FROM Words, BookToWord &#39;</span> <span class="o">+</span> \
+                         <span class="s1">&#39;WHERE BookToWord.word_id = Words.id &#39;</span> <span class="o">+</span> \
+                         <span class="s1">&#39;AND (Words.condition IS NULL OR Words.condition &lt;&gt; ?) &#39;</span> <span class="o">+</span> \
+                         <span class="s1">&#39;ORDER BY &#39;</span> <span class="o">+</span> <span class="n">order_field</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">order</span>
+
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_expression</span><span class="p">,</span> <span class="p">(</span><span class="n">condition</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="find_word"><a class="viewcode-back" href="../../libraries.html#libraries.db_lib.find_word">[docs]</a><span class="nd">@connection_to_db</span>
+<span class="k">def</span> <span class="nf">find_word</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return info about word</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">word_id</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT front, transcription, translation, comments, condition, SUM(quantity) &#39;</span>
+                    <span class="s1">&#39;FROM Words, BookToWord &#39;</span>
+                    <span class="s1">&#39;WHERE Words.id = ? &#39;</span>
+                    <span class="s1">&#39;AND BookToWord.word_id = Words.id&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">word_id</span><span class="p">,))</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT book_name, quantity FROM BookToWord, Book &#39;</span>
+                    <span class="s1">&#39;WHERE BookToWord.word_id = ? &#39;</span>
+                    <span class="s1">&#39;AND Book.id = BookToWord.book_id&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">word_id</span><span class="p">,))</span>
+        <span class="n">books</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT dic_name FROM DictionariesToWord, Dictionaries &#39;</span>
+                    <span class="s1">&#39;WHERE DictionariesToWord.word_id = ? &#39;</span>
+                    <span class="s1">&#39;AND Dictionaries.id = DictionariesToWord.dictionary_id&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">word_id</span><span class="p">,))</span>
+        <span class="n">dictionaries</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">:</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">books</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">dictionaries</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">return</span> <span class="n">word</span><span class="p">,</span> <span class="n">books</span><span class="p">,</span> <span class="n">dictionaries</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">pass</span>
+    <span class="c1"># create_new_tables()</span>
+    <span class="c1"># anki_t_db()</span>
+    <span class="c1"># book_t_db(book_name=&quot;book_textfile1&quot;)</span>
+    <span class="c1"># words_from_book_2db(book_name=&quot;book_textfile1&quot;)</span>
+    <span class="c1"># create_dictionary()</span>
+    <span class="c1"># list_dictionary()</span>
+    <span class="c1"># addword_2_dictionary(word=&quot;a&quot;)</span>
+    <span class="c1"># del_word_from_words(word=&#39;rat&#39;)</span>
+    <span class="c1"># rename_dictionary(dictionary=&#39;sdfgsef&#39;, new_name=&#39;MyDictionarry&#39;)</span>
+    <span class="c1"># del_book()</span>
+    <span class="c1"># del_dictionary()</span>
+    <span class="c1"># select_from_dictionary()</span>
+    <span class="c1"># select_words_by_condition(condition = &#39;s&#39;)</span>
+    <span class="c1"># select_book_words_with_condition()</span>
+    <span class="c1"># select_all_words_with_condition()</span>
+    <span class="c1"># rename_book(book_name=&quot;NewBookName&quot;, new_name=&quot;BookName&quot;)</span>
+    <span class="c1"># change_word_function(word=&#39;door&#39;, translation=&#39;дверь&#39;, transcription=&#39;[door]&#39;)</span>
+    <span class="c1"># dell_word_from_dictionary(word=&#39;the&#39;)</span>
+    <span class="c1"># select_dictionary_words_with_condition(condition1=&#39;i&#39;, condition2=&#39;s&#39;)</span>
+    <span class="c1"># rename_book(book_name=&quot;Harry Harrison&quot;, new_name=&quot;Harry Harrison&quot;)</span>
+
+    <span class="c1"># print(check_book_exist(&#39;Little_Prince&#39;))</span>
+    <span class="c1"># print(check_dictionary_exist(&#39;New&#39;))</span>
+    <span class="c1">#</span>
+    <span class="c1"># if check_word_exist(&#39;ands&#39;):</span>
+    <span class="c1">#     print(&#39;exist&#39;)</span>
+    <span class="c1"># else:</span>
+    <span class="c1">#     print(&#39;not exist&#39;)</span>
+    <span class="c1">#</span>
+    <span class="c1"># dell_word_from_dictionary(&#39;and&#39;, &#39;New&#39;)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../program_documentation.html">Dictionary_from_text 1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Dmitry Shutov.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.1.
+    </div>
+  </body>
+</html>

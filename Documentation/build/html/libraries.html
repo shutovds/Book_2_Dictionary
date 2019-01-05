@@ -1,0 +1,644 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Libraries &#8212; Dictionary_from_text 1 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="program_documentation.html">Dictionary_from_text 1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="program_documentation.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Libraries</a><ul>
+<li><a class="reference internal" href="#menue-lib">menue_lib</a></li>
+<li><a class="reference internal" href="#db-lib">db_lib</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/libraries.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="libraries">
+<h1>Libraries<a class="headerlink" href="#libraries" title="Permalink to this headline">¶</a></h1>
+<p>There are two libraries used in program, menue_lib - provide user interface,
+and db_lib - provide communication to database.</p>
+<div class="section" id="menue-lib">
+<h2>menue_lib<a class="headerlink" href="#menue-lib" title="Permalink to this headline">¶</a></h2>
+<p><em>provide user interface for program</em></p>
+<blockquote>
+<div><span class="target" id="module-libraries.menue_lib"></span><p>This module includes the following classes to generate main menu of program:
+classes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Database</li>
+<li>Books</li>
+<li>Dictionaries</li>
+<li>Words</li>
+<li>Misc</li>
+<li>Help</li>
+</ul>
+</div></blockquote>
+<dl class="class">
+<dt id="libraries.menue_lib.Books">
+<em class="property">class </em><code class="descclassname">libraries.menue_lib.</code><code class="descname">Books</code><a class="reference internal" href="_modules/libraries/menue_lib.html#Books"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Books" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class provides methods for books handling</p>
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Books.dell_book">
+<em class="property">static </em><code class="descname">dell_book</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Books.dell_book"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Books.dell_book" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove book from dictionary</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Books.import_book">
+<em class="property">static </em><code class="descname">import_book</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Books.import_book"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Books.import_book" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download book to database</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Books.list_books">
+<em class="property">static </em><code class="descname">list_books</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Books.list_books"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Books.list_books" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the list of downloaded books</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Books.rename_book">
+<em class="property">static </em><code class="descname">rename_book</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Books.rename_book"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Books.rename_book" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename book</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Books.submenu">
+<em class="property">static </em><code class="descname">submenu</code><span class="sig-paren">(</span><em>choice_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Books.submenu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Books.submenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submenu for Books</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libraries.menue_lib.Database">
+<em class="property">class </em><code class="descclassname">libraries.menue_lib.</code><code class="descname">Database</code><a class="reference internal" href="_modules/libraries/menue_lib.html#Database"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Database" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class provides methods for work with database</p>
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Database.format">
+<em class="property">static </em><code class="descname">format</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Database.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Database.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function formats the database (remove all data and create new tables)</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Database.import_f_anki">
+<em class="property">static </em><code class="descname">import_f_anki</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Database.import_f_anki"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Database.import_f_anki" title="Permalink to this definition">¶</a></dt>
+<dd><p>import words from Anki export file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libraries.menue_lib.Dictionaries">
+<em class="property">class </em><code class="descclassname">libraries.menue_lib.</code><code class="descname">Dictionaries</code><a class="reference internal" href="_modules/libraries/menue_lib.html#Dictionaries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Dictionaries" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class provides methods for dictionaries handling</p>
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Dictionaries.create_dictionary">
+<em class="property">static </em><code class="descname">create_dictionary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Dictionaries.create_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Dictionaries.create_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create new dictionary</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Dictionaries.dell_dictionary">
+<em class="property">static </em><code class="descname">dell_dictionary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Dictionaries.dell_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Dictionaries.dell_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete dictionary</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Dictionaries.list_dictionaries">
+<em class="property">static </em><code class="descname">list_dictionaries</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Dictionaries.list_dictionaries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Dictionaries.list_dictionaries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the list of dictionaries</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Dictionaries.rename_dictionary">
+<em class="property">static </em><code class="descname">rename_dictionary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Dictionaries.rename_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Dictionaries.rename_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename dictionary</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Dictionaries.submenu">
+<em class="property">static </em><code class="descname">submenu</code><span class="sig-paren">(</span><em>choice_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Dictionaries.submenu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Dictionaries.submenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submenu for Dictionaries</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libraries.menue_lib.Help">
+<em class="property">class </em><code class="descclassname">libraries.menue_lib.</code><code class="descname">Help</code><a class="reference internal" href="_modules/libraries/menue_lib.html#Help"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Help information</p>
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Help.instruction">
+<em class="property">static </em><code class="descname">instruction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Help.instruction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Help.instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the instruction how to use the program</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Help.print_help">
+<em class="property">static </em><code class="descname">print_help</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Help.print_help"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Help.print_help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print Help information</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Help.submenu">
+<em class="property">static </em><code class="descname">submenu</code><span class="sig-paren">(</span><em>choice_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Help.submenu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Help.submenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submenu for Help</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libraries.menue_lib.Misc">
+<em class="property">class </em><code class="descclassname">libraries.menue_lib.</code><code class="descname">Misc</code><a class="reference internal" href="_modules/libraries/menue_lib.html#Misc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Misc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Additional methods for menu</p>
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Misc.exit">
+<em class="property">static </em><code class="descname">exit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Misc.exit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Misc.exit" title="Permalink to this definition">¶</a></dt>
+<dd><p>See in the main circle</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Misc.language">
+<em class="property">static </em><code class="descname">language</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Misc.language"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Misc.language" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for changing language of user interface</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Misc.submenu">
+<em class="property">static </em><code class="descname">submenu</code><span class="sig-paren">(</span><em>choice_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Misc.submenu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Misc.submenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submenu for Misc</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Misc.wrong_choice">
+<em class="property">static </em><code class="descname">wrong_choice</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Misc.wrong_choice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Misc.wrong_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print response in case of wrong choice in menu</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libraries.menue_lib.Words">
+<em class="property">class </em><code class="descclassname">libraries.menue_lib.</code><code class="descname">Words</code><a class="reference internal" href="_modules/libraries/menue_lib.html#Words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class provides methods for words handling</p>
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Words.add_word_2dic">
+<em class="property">static </em><code class="descname">add_word_2dic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Words.add_word_2dic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words.add_word_2dic" title="Permalink to this definition">¶</a></dt>
+<dd><p>add words to dictionary</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Words.add_word_to_ignore">
+<em class="property">static </em><code class="descname">add_word_to_ignore</code><span class="sig-paren">(</span><em>word</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Words.add_word_to_ignore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words.add_word_to_ignore" title="Permalink to this definition">¶</a></dt>
+<dd><p>function is used in analyze method</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Words.analyze_book_words">
+<em class="property">static </em><code class="descname">analyze_book_words</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Words.analyze_book_words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words.analyze_book_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method provides words processing from dictionary.
+It download list of words for chosen book from database to the memory,
+and show it by frequency in descending order. User can process the words:</p>
+<blockquote>
+<div><ul class="simple">
+<li>add word to Ignor or to other dictionary</li>
+<li>remove word</li>
+<li>change the word</li>
+<li>pass the word</li>
+</ul>
+</div></blockquote>
+<p>It is necessary for making your oun dictionary</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Words.change_word">
+<em class="property">static </em><code class="descname">change_word</code><span class="sig-paren">(</span><em>word=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Words.change_word"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words.change_word" title="Permalink to this definition">¶</a></dt>
+<dd><p>change word</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Words.del_word_from_dic">
+<em class="property">static </em><code class="descname">del_word_from_dic</code><span class="sig-paren">(</span><em>word=''</em>, <em>dictionary=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Words.del_word_from_dic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words.del_word_from_dic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete word from dictionary</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Words.delete_word_from_words">
+<em class="property">static </em><code class="descname">delete_word_from_words</code><span class="sig-paren">(</span><em>word</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Words.delete_word_from_words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words.delete_word_from_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>function is used in analyze method</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Words.edit_and_add2dictionary">
+<em class="property">static </em><code class="descname">edit_and_add2dictionary</code><span class="sig-paren">(</span><em>word</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Words.edit_and_add2dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words.edit_and_add2dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>function is used in analyze method</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Words.find_word">
+<em class="property">static </em><code class="descname">find_word</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Words.find_word"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words.find_word" title="Permalink to this definition">¶</a></dt>
+<dd><p>find the word in database - return info
+(in what books and how many times, in what dictionaries)</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Words.list_word_from_dic">
+<em class="property">static </em><code class="descname">list_word_from_dic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Words.list_word_from_dic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words.list_word_from_dic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the list of words in dictionary</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Words.select_number_of_words">
+<em class="property">static </em><code class="descname">select_number_of_words</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Words.select_number_of_words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words.select_number_of_words" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Set amount of words for representation</dt>
+<dd>(5 by default)</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Words.select_words_order">
+<em class="property">static </em><code class="descname">select_words_order</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Words.select_words_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words.select_words_order" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Set the order of words representation</dt>
+<dd><ul class="first last simple">
+<li>by quantity</li>
+<li>in alphabeticall order</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Words.submenu">
+<em class="property">static </em><code class="descname">submenu</code><span class="sig-paren">(</span><em>choice_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Words.submenu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words.submenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submenu for Words</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libraries.menue_lib.Words.word_processing">
+<em class="property">static </em><code class="descname">word_processing</code><span class="sig-paren">(</span><em>book_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#Words.word_processing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.Words.word_processing" title="Permalink to this definition">¶</a></dt>
+<dd><p>function is used for making menu for analyze method</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.menue_lib.add_word_to_dictionary">
+<code class="descclassname">libraries.menue_lib.</code><code class="descname">add_word_to_dictionary</code><span class="sig-paren">(</span><em>word</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#add_word_to_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.add_word_to_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function adds words to the dictionary
+this function is used in class Words, methods:</p>
+<blockquote>
+<div><ul class="simple">
+<li>analyze_book_words</li>
+<li>add_word_2dic</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.menue_lib.chang_lang">
+<code class="descclassname">libraries.menue_lib.</code><code class="descname">chang_lang</code><span class="sig-paren">(</span><em>lg_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#chang_lang"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.chang_lang" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function set up language for main menu</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.menue_lib.change_word_function">
+<code class="descclassname">libraries.menue_lib.</code><code class="descname">change_word_function</code><span class="sig-paren">(</span><em>word</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#change_word_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.change_word_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function adds words to the dictionary
+this function is used in class Words, methods:</p>
+<blockquote>
+<div><ul class="simple">
+<li>analyze_book_words</li>
+<li>change_word_function</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.menue_lib.choose_from_menu">
+<code class="descclassname">libraries.menue_lib.</code><code class="descname">choose_from_menu</code><span class="sig-paren">(</span><em>choice</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#choose_from_menu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.choose_from_menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>main menu function</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.menue_lib.print_words">
+<code class="descclassname">libraries.menue_lib.</code><code class="descname">print_words</code><span class="sig-paren">(</span><em>words_list</em>, <em>length=5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#print_words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.print_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for printing table of Words with Frequency, Transcription and Translation</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.menue_lib.printword">
+<code class="descclassname">libraries.menue_lib.</code><code class="descname">printword</code><span class="sig-paren">(</span><em>word</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#printword"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.printword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for printing Word with Frequency, Transcription and Translation</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.menue_lib.separator4">
+<code class="descclassname">libraries.menue_lib.</code><code class="descname">separator4</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/menue_lib.html#separator4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.menue_lib.separator4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for print —- separator</p>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="db-lib">
+<h2>db_lib<a class="headerlink" href="#db-lib" title="Permalink to this headline">¶</a></h2>
+<p><em>All data saving to database, this library provide communication to database</em></p>
+<blockquote>
+<div><span class="target" id="module-libraries.db_lib"></span><p>This module includes all classes for processing database requests:</p>
+<dl class="class">
+<dt id="libraries.db_lib.Words">
+<em class="property">class </em><code class="descclassname">libraries.db_lib.</code><code class="descname">Words</code><span class="sig-paren">(</span><em>word</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#Words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.Words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the dictionary of words for import words to DB</p>
+<dl class="method">
+<dt id="libraries.db_lib.Words.length_of_dictionary">
+<code class="descname">length_of_dictionary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#Words.length_of_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.Words.length_of_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count length of the word</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libraries.db_lib.Words.set_to_dictionary">
+<code class="descname">set_to_dictionary</code><span class="sig-paren">(</span><em>dictionary</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#Words.set_to_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.Words.set_to_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.addword_2_dictionary">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">addword_2_dictionary</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#addword_2_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.addword_2_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add new word to dictionary</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.anki_t_db">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">anki_t_db</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#anki_t_db"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.anki_t_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import data from Anki dictionary to table Anki DB</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.book_t_db">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">book_t_db</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#book_t_db"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.book_t_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import book from txt file to table Book DB</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.change_word">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">change_word</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#change_word"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.change_word" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function provides changing the word
+Fields that are possible to add</p>
+<ul class="simple">
+<li>front</li>
+<li>transcription</li>
+<li>translation</li>
+<li>comments</li>
+<li>condition</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.check_book_exist">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">check_book_exist</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#check_book_exist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.check_book_exist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select that book exist
+book = args[0]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.check_dictionary_exist">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">check_dictionary_exist</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#check_dictionary_exist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.check_dictionary_exist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select that dictionary exist
+dictionary = args[0]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.check_word_exist">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">check_word_exist</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#check_word_exist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.check_word_exist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select that word exist
+word = args[0]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.connection_to_db">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">connection_to_db</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#connection_to_db"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.connection_to_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>This decorator provides connection to database for all functions and close connection after
+function made requests</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.create_dictionary">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">create_dictionary</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#create_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.create_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create new user dictionary</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.create_new_tables">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">create_new_tables</code><span class="sig-paren">(</span><em>cur</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#create_new_tables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.create_new_tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create next tables:
+* Anki - contain words imported from Anki
+* Book - contain imported book: text and name
+* BookToWord - set connection for book name, word and frequency, provide many to many
+relation for tables Book и Words
+* Words - contain imported words from all books</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.del_book">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">del_book</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#del_book"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.del_book" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete book from Database the table Book and connected tables
+(also delete the text of the book)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.del_dictionary">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">del_dictionary</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#del_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.del_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the dictionary from table Dictionaries and connected tables
+(слова входившие в dictionary остаются в таблице Words до тех пор пока не будет удалена книга
+либо они не будут удалены индивидуально)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.del_word_from_words">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">del_word_from_words</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#del_word_from_words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.del_word_from_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove word from table Words and connected tables</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.dell_word_from_dictionary">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">dell_word_from_dictionary</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#dell_word_from_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.dell_word_from_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete word from dictionary</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.find_word">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">find_word</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#find_word"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.find_word" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return info about word</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.list_books">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">list_books</code><span class="sig-paren">(</span><em>cur=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#list_books"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.list_books" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function return the list of books in database</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.list_dictionary">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">list_dictionary</code><span class="sig-paren">(</span><em>cur=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#list_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.list_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of existed dictionaries</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.rename_book">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">rename_book</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#rename_book"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.rename_book" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename the book</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.rename_dictionary">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">rename_dictionary</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#rename_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.rename_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename the dictionary</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.select_all_words_with_condition">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">select_all_words_with_condition</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#select_all_words_with_condition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.select_all_words_with_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of words from DB Words table (except Ignore)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.select_book_words_with_condition">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">select_book_words_with_condition</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#select_book_words_with_condition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.select_book_words_with_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of the words based on the Book (in frequency order, except Ignore)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.select_dictionary_words_with_condition">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">select_dictionary_words_with_condition</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#select_dictionary_words_with_condition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.select_dictionary_words_with_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Выводим список слов на основе словаря
+отсеиваем слова по:</p>
+<ul class="simple">
+<li>condition1=’i’</li>
+<li>condition2=’s’</li>
+</ul>
+<p>упорядочиваем по убыванию:
+* order=’quantity’</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.select_from_dictionary">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">select_from_dictionary</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#select_from_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.select_from_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return words from dictionary</p>
+<ul class="simple">
+<li>dictionary=”DictionarryName”,</li>
+<li>order_field=’quantity’,</li>
+<li>order=’DESC’</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.select_words_by_condition">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">select_words_by_condition</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#select_words_by_condition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.select_words_by_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the words with condition mark from Words table
+s - studded   condition=’s‘
+i - ignore</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libraries.db_lib.words_from_book_2db">
+<code class="descclassname">libraries.db_lib.</code><code class="descname">words_from_book_2db</code><span class="sig-paren">(</span><em>cur</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libraries/db_lib.html#words_from_book_2db"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libraries.db_lib.words_from_book_2db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function provides export from book to database</p>
+<ol class="arabic simple">
+<li>download text from table Book dictionary for processing</li>
+<li>calculation the frequency for words in the book</li>
+<li>deletion words repetitions</li>
+<li>saving words to table Words and set relation in table BookToWord</li>
+</ol>
+</dd></dl>
+
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="program_documentation.html">Dictionary_from_text 1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Dmitry Shutov.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.1.
+    </div>
+  </body>
+</html>
