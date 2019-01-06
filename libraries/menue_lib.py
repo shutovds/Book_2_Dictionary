@@ -841,11 +841,11 @@ class Help:
         """
         Print Help information
         """
-        if sys.platform == 'linux':
-            webbrowser.open_new("file://" + BASEPATH + "/Documentation/build/html"
-                                                       "/program_documentation.html")
-        elif sys.platform == 'windows':
-            print('win32')
+
+        webbrowser.open_new("file://" + BASEPATH + "/Documentation/build/html"
+                                                   "/program_documentation.html")
+        # elif sys.platform == 'win32':
+        #     print('win32')
 
         # short_help = "Documentation/source/help.rst"    # "settings/help.txt"
         # description = "Documentation/source/description.rst"
@@ -868,11 +868,9 @@ class Help:
         """
         Print the instruction how to use the program
         """
-        if sys.platform == 'linux':
-            webbrowser.open_new("file://"+BASEPATH + "/Documentation/build/html"
-                                                     "/program_documentation.html")
-        elif sys.platform == 'windows':
-            print('windows')
+        # if sys.platform == 'linux':
+        webbrowser.open_new("file://"+BASEPATH + "/Documentation/build/html"
+                                                 "/program_documentation.html")
 
 
 class Misc:
