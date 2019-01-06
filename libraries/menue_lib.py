@@ -104,7 +104,7 @@ class Database:
         confirm = input(_('Are you sure you want to format database ?'
                           '(all data will be lost) y/n:'))
         if confirm in CONF_LIST:
-            db.create_new_tables(DB_PATH)
+            db.create_new_tables()
             print(_('Database was formatted. All data was deleted'))
         else:
             print(_('Formatting was canceled'))
@@ -845,7 +845,7 @@ class Help:
             webbrowser.open_new("file://" + BASEPATH + "/Documentation/build/html"
                                                        "/program_documentation.html")
         elif sys.platform == 'windows':
-            print('windows')
+            print('win32')
 
         # short_help = "Documentation/source/help.rst"    # "settings/help.txt"
         # description = "Documentation/source/description.rst"
