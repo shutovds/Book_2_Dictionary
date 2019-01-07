@@ -1,0 +1,458 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-05 01:18-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: Book_vocabularry_to_Anki.py:58
+msgid ""
+"\n"
+"Action =  "
+msgstr ""
+"\n"
+"Действие =  "
+
+#: Book_vocabularry_to_Anki.py:63
+msgid "Thank you for being with us!"
+msgstr "Спасибо, что Вы работали с нами!"
+
+#: menue_lib.py:157
+msgid "Are you sure you want to format database ?(all data will be lost) y/n:"
+msgstr "Вы уверены, что хотите отформатировать базу данных ?(все введенные данные "
+"будут утеряны) Y/n "
+
+#: menue_lib.py:161
+msgid "Database was formatted. All data was delete"
+msgstr "База данных отформатирована, данные удалены"
+
+#: menue_lib.py:163
+msgid "Formatting was canseled"
+msgstr "Операция форматирования отменена"
+
+#: menue_lib.py:174
+msgid "Words from AnkiFile secesfully imported into DB"
+msgstr ""
+
+#: menue_lib.py:185
+msgid ""
+"\n"
+"Books that was downloaded: "
+msgstr ""
+
+#: menue_lib.py:194
+msgid "Import book to database for analyse"
+msgstr "Загрузка книги в DB"
+
+#: menue_lib.py:197
+msgid "Copy the bookname.txt file to the Books folder \n"
+msgstr "Поместите книгу в формате txt-файла в папку Books \n"
+
+#: menue_lib.py:198
+msgid "Type the name of the book (without .txt): "
+msgstr "Введите название файла книги которую необходимо загрузить: "
+
+#: menue_lib.py:200
+#, python-brace-format
+msgid ""
+"\n"
+"Download '{path}'?"
+msgstr "Загрузить книгу '{path}':"
+
+#: menue_lib.py:207
+msgid "Book was downloaded"
+msgstr "Книга загружена"
+
+#: menue_lib.py:210
+msgid "Such file doesn't exists!"
+msgstr "Такой файл не существует!"
+
+#: menue_lib.py:212
+msgid "Do you want to download a book? y/n:"
+msgstr "Хотите ли Вы загрузить книгу? y/n: "
+
+#: menue_lib.py:216
+msgid "Book download was cenceled"
+msgstr "Загрузка книги отменена"
+
+#: menue_lib.py:219
+msgid ""
+"\n"
+"Do you want to download a book? y/n:"
+msgstr ""
+"\n"
+"Хотите ли Вы загрузить книгу? y/n: "
+
+#: menue_lib.py:230
+msgid "choose_from_menu the book: "
+msgstr "Выберите книгу"
+
+#: menue_lib.py:231
+msgid "Are you sure you want to delete the book? y/n:"
+msgstr "Вы уверены, что хотите удалить книгу? y/n: "
+
+#: menue_lib.py:234
+#, python-brace-format
+msgid "Book '{name}' deleted"
+msgstr "Книга '{name}' удалена"
+
+#: menue_lib.py:236 menue_lib.py:305
+msgid "Delete canceled"
+msgstr "Операция удаления отменена"
+
+#: menue_lib.py:245
+msgid "Choos the book:  "
+msgstr "Выберите книгу: "
+
+#: menue_lib.py:249
+msgid "choose_from_menu new name for book: "
+msgstr "Введите новое название для книги: "
+
+#: menue_lib.py:250
+msgid "Are you shure you want rename the book? y/n:"
+msgstr "Вы уверены, что хотите переименовать книгу? y/n:"
+
+#: menue_lib.py:254
+#, python-brace-format
+msgid "Book '{old}' renamed to '{new}'"
+msgstr "Книга '{old}' переименовара в '{new}'"
+
+#: menue_lib.py:256
+msgid "Rename canceled choose_from_menu another bookname!"
+msgstr "Переименование отменено, выберите другое название для книги!"
+
+#: menue_lib.py:258 menue_lib.py:326
+msgid "Rename canceled"
+msgstr "Переименование отменено!"
+
+#: menue_lib.py:264
+msgid "This book doesn't exists, use \"lbook\" - command to list the books"
+msgstr "Книги с таким названием нет в базе данных, используйте команду"
+"для уточнения списка загруженных книг"
+
+#: menue_lib.py:276 menue_lib.py:573
+msgid ""
+"\n"
+"Dictionaries:"
+msgstr ""
+"\n"
+"Список словарей:"
+
+#: menue_lib.py:287
+msgid "choose_from_menu the name for the dictionary: "
+msgstr "Выберите название для словаря: "
+
+#: menue_lib.py:288
+msgid "Comments: "
+msgstr "Комментарий: "
+
+#: menue_lib.py:299 menue_lib.py:351 menue_lib.py:412
+msgid "choose_from_menu the dictionary: "
+msgstr "Выберите словарь: "
+
+#: menue_lib.py:300
+msgid "Are you sure you want to delete the dictionary? y/n:"
+msgstr "Вы уверены, что хотите удалить словарь? y/n: "
+
+#: menue_lib.py:303
+#, python-brace-format
+msgid "Dictionary '{name}' deleted"
+msgstr "Словарь '{name}' удален"
+
+#: menue_lib.py:314
+msgid "choose_from_menu the dictionary:  "
+msgstr "Выберите словарь: "
+
+#: menue_lib.py:319
+msgid "choose_from_menu new name for dictionary:  "
+msgstr "Выберите новое называние для словаря: "
+
+#: menue_lib.py:320
+msgid "Are you shure you want rename the dictionary? y/n:"
+msgstr "Вы уверены, что хотите переименовать словарь? y/n: "
+
+#: menue_lib.py:323
+#, python-brace-format
+msgid "Dictionary '{old}' renamed to '{new}'"
+msgstr "Словарь '{old}' переименован в '{new}'"
+
+#: menue_lib.py:333
+msgid ""
+"This dictionary doesn't exists, use \"ldic\" - command to list the "
+"dictionaries"
+msgstr ""
+"Такого словаря нет в базе данных, используйте команду \"ldic\" "
+"для того, чтобы уточнить список существующих словарей"
+
+#: menue_lib.py:343 menue_lib.py:390
+msgid "by frequency"
+msgstr "по частотности"
+
+#: menue_lib.py:353
+#, python-brace-format
+msgid "{defauld_dictionary} - dictionary by default"
+msgstr "{defauld_dictionary} - словарь по умолчанию"
+
+#: menue_lib.py:354
+msgid "Inter new name of the dictionary/or leave the field empty: "
+msgstr "Введите новое название словаря либо оставьте поле пустым: "
+
+#: menue_lib.py:370
+msgid "Such dictionary doesn't exist!"
+msgstr "Такого словаря нет в базе данных!"
+
+#: menue_lib.py:371
+msgid "List of dictionaries:"
+msgstr "Список словарей: "
+
+#: menue_lib.py:378
+#, python-brace-format
+msgid "Dictionary contain {amount} words"
+msgstr "Словарь содержит {amount} слов"
+
+#: menue_lib.py:380
+#, python-brace-format
+msgid ""
+"choose_from_menu the number of words that you want to process ({amount} by default): "
+msgstr ""
+"Выберите количество слов, которые Вы хотите обработать ({amount} - по умолчанию): "
+
+#: menue_lib.py:386
+msgid "Sort order selected: "
+msgstr "Выбран порядок сортировки: "
+
+#: menue_lib.py:387
+msgid ""
+"Do you like to change the sort order? (by frequency - f/alphabetically - a): "
+msgstr ""
+"Изменить порядок сортировки (частотность - f/алфавит - a): "
+
+#: menue_lib.py:394
+msgid "alphabetically"
+msgstr "по алфавту"
+
+#: menue_lib.py:411
+msgid "Type the word that you want to delete from dictionary: "
+msgstr "Введите слово, которое вы хотите удалить из словаря: "
+
+#: menue_lib.py:458
+msgid "choose_from_menu the book for processing:  "
+msgstr "Введите название Книги для анализа: "
+
+#: menue_lib.py:461
+#, python-brace-format
+msgid "Book contain {amount} words"
+msgstr "Книга содержит {amount} слов"
+
+#: menue_lib.py:462
+#, python-brace-format
+msgid ""
+"choose_from_menu the number of words that you want to process ({list_lang} by "
+"default): "
+msgstr ""
+"Количество слов для обработки ({list_lang} - по умолчанию): "
+
+#: menue_lib.py:470
+msgid ""
+"instruction:\n"
+"Words that was listed above will be listed one by one. You should choose_from_menu the "
+"action: \n"
+"        i - add word to 'Ignore'-dictionary (words, you don't want to see "
+"next time in processing. \n"
+"            Some words that contain mistakes, or you know them, or by any "
+"other reasons)\n"
+"        e - edit the word (add translation, transcription or comments)\n"
+"        a - add word to dictionary (it will offer to choose_from_menu the dictionary)\n"
+"        d - delite the word\n"
+"        p - skip the word\n"
+"        q - quit from processing\n"
+"        h - help \n"
+msgstr ""
+"Инструкция:\n"
+"Слова из списка выше будут выводиться по одному, необходимо выбрать "
+"действие: \n"
+"        i - добавить слово в игнор (слово известно, содержит ошибку или не "
+"существует)\n"
+"        e - отредактировать слово (добавить перевод, транскрипцию, или "
+"комментарий\n"
+"        a - добавить слово в словарь\n"
+"        d - удалить слово \n"
+"        p - пропустить слово\n"
+"        q - завершить обработку\n"
+"        h - help \n"
+
+#: menue_lib.py:483
+msgid "Do you want to start processing the words? y/n:"
+msgstr "Начинаем анализ? y/n: "
+
+#: menue_lib.py:490
+msgid "choose_from_menu the action: i/r/a/d/p/q/h: "
+msgstr "Выберите действие: i/r/a/d/p/q/h: "
+
+#: menue_lib.py:503
+msgid ""
+"\n"
+"The word was added to the dictionary Ignore!"
+msgstr ""
+"\n"
+"Слово было добавлено в словарь Ignore!"
+
+#: menue_lib.py:507
+msgid ""
+"\n"
+"The dictionary \"Ignore\" had been created. The word was added to the "
+"dictionary!"
+msgstr ""
+"\n"
+"Словарь \"Ignore\" был создан. Слово добавлено в словарь!"
+
+#: menue_lib.py:543
+msgid "Pleas choose_from_menu the action!"
+msgstr "Пожалуйста, выберите действие!"
+
+#: menue_lib.py:561 menue_lib.py:601
+msgid "choose_from_menu the word: "
+msgstr "Выберите слово: "
+
+#: menue_lib.py:568
+msgid "Book"
+msgstr "Книга"
+
+#: menue_lib.py:577
+msgid ""
+"\n"
+"The word doesn't included in any dictionary!"
+msgstr ""
+"\n"
+"Слово не включено ни в один словарь!"
+
+#: menue_lib.py:588
+msgid "Change the word "
+msgstr "Изменить слово: "
+
+#: menue_lib.py:610
+msgid "List of dictionaries: "
+msgstr "Список словарей: "
+
+#: menue_lib.py:613
+msgid "choose_from_menu the dictionary"
+msgstr "Выберите словарь"
+
+#: menue_lib.py:617
+msgid "The word was seccessfully added to the dictionary!"
+msgstr "Слово успешно добавлено в словарь!"
+
+#: menue_lib.py:620
+msgid "Dictionary doesn't exist. Please check spelling!"
+msgstr "Ошибка, неверно указано название словаря! Проверьте написание!"
+
+#: menue_lib.py:630
+msgid "Change the word: "
+msgstr "Изменить написание слова (Введите новое написание): "
+
+#: menue_lib.py:631
+msgid "Add/Change transcription: "
+msgstr "Введите/добавьте транскрипцию: "
+
+#: menue_lib.py:632
+msgid "Add/Change translation: "
+msgstr "Введите/добавьте перевод: "
+
+#: menue_lib.py:633
+msgid "Add/Change the comment: "
+msgstr "Введите/добавьте комментарий: "
+
+#: menue_lib.py:648
+msgid "New word: "
+msgstr "Новые значения: "
+
+#: menue_lib.py:652
+msgid "Save word  y/n: "
+msgstr "Сохранить слово? y/n: "
+
+#: menue_lib.py:656
+#, python-brace-format
+msgid "The word '{word}' was changed!"
+msgstr "Слово '{word}' было изменено!"
+
+#: menue_lib.py:658
+#, python-brace-format
+msgid "The changing of word '{word}' was canceled!"
+msgstr "Изменения для слова '{word}' отменены!"
+
+#: menue_lib.py:659
+msgid "Go back to editing/exit? y/n:"
+msgstr "Вернуться к редактированию/выйти? y/n:"
+
+#: menue_lib.py:717
+msgid "instructions: i , quit - q "
+msgstr "инструкция: i, выход - q "
+
+#: menue_lib.py:726
+msgid ""
+"You intered command that dosen't exist. \n"
+"Please inter h for help"
+msgstr ""
+"Вы ввели команду, которая не существует. \n"
+"Чтобы посмотреть справку нажмите h"
+
+#: menue_lib.py:733
+msgid "Curren language: English"
+msgstr "Текущий язык: Английский"
+
+#: db_lib.py:251
+#, python-brace-format
+msgid "Слова {word} нет в списке слов Words"
+msgstr "Слова {word} нет в списке слов"
+
+#: db_lib.py:258
+#, python-brace-format
+msgid "Словарь {dictionary} не существует"
+msgstr "Словарь {dictionary} не существует"
+
+#: db_lib.py:264
+#, python-brace-format
+msgid "Cлово {word} успешно удалено из словаря {dictionary}"
+msgstr "Cлово {word} успешно удалено из словаря {dictionary}"
+
+#: db_lib.py:267
+#, python-brace-format
+msgid "Ошибка, слово {word} не было удалено из словаря!!!"
+msgstr "Ошибка, слово {word} не было удалено из словаря!!!"
+
+#: db_lib.py:360
+#, python-brace-format
+msgid "Словарь {new_name} уже существует! Выберите другое имя"
+msgstr "Словарь {new_name} уже существует! Выберите другое имя"
+
+#: db_lib.py:420
+#, python-brace-format
+msgid "Слова {word} нет в таблице"
+msgstr "Слова {word} нет в таблице"
+
+#: db_lib.py:441
+#, python-brace-format
+msgid "Книги {book_name} нет в таблице"
+msgstr "Книги {book_name} нет в таблице"
+
+#: db_lib.py:463
+#, python-brace-format
+msgid "Словаря {dictionary} нет в таблице"
+msgstr "Словаря {dictionary} нет в таблице"
+
+#: db_lib.py:628
+#, python-brace-format
+msgid "Слова {word} нет в базе данных"
+msgstr "Слова {word} нет в базе данных"
