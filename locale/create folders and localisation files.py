@@ -16,7 +16,7 @@ def create_pop_files(lang_list):
     for language in LANGUAGES:
         if language in lang_list:
             os.chdir(BASEPATH)
-            command = 'xgettext -o ./locale/' + language + '/LC_MESSAGES/main.pot main.py' # for Book_vocabularry_to_Anki
+            command = 'xgettext -j -o ./locale/' + language + '/LC_MESSAGES/main.pot main.py' # for Book_vocabularry_to_Anki
             os.system(command)
 
             os.chdir(BASEPATH + '/libraries')

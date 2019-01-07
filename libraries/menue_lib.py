@@ -39,11 +39,11 @@ def chang_lang(lg_name):
 
 _ = gettext.gettext
 
-MAIN_INSTRUCTION = '''
-\n:
+MAIN_INSTRUCTION = _('''
     Settings:
         lang - You can choose the language for interface (English or Russian)
         h - help
+        i - commands (info)
         q - quit
         format - to format database (all data will be deleted)
     Anki:
@@ -67,7 +67,7 @@ MAIN_INSTRUCTION = '''
                 in what dictionaries))
         chword - change the word (front, transcription, back, examples, comment)
         a2dic  - add word to dictionary     
-        '''
+        ''')
 
 
 def choose_from_menu(choice):
@@ -831,8 +831,8 @@ class Help:
         if choice_name == "h":  # format database (remove all data and create new tables)
             return Help.print_help()
 
-        # if choice_name == "i":  # format database (remove all data and create new tables)
-        #     return Help.instruction()
+        if choice_name == "i":  # format database (remove all data and create new tables)
+            return Help.instruction()
 
         return False
 
@@ -868,9 +868,10 @@ class Help:
         """
         Print the instruction how to use the program
         """
+        print(_(MAIN_INSTRUCTION))
         # if sys.platform == 'linux':
-        webbrowser.open_new("file://"+BASEPATH + "/Documentation/build/html"
-                                                 "/program_documentation.html")
+        #     webbrowser.open_new("file://"+BASEPATH + "/Documentation/build/html"
+        #                                              "/program_documentation.html")
 
 
 class Misc:

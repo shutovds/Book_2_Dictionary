@@ -60,7 +60,7 @@ def choose_language():
 
 print("Hello! We are glad to work with you!")
 choose_language()
-print(menue.MAIN_INSTRUCTION)
+print(_(menue.MAIN_INSTRUCTION))
 
 while CHOICE != 'q':
     CHOICE = input(_('\nAction =  '))
