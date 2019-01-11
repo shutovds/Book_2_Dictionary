@@ -633,6 +633,7 @@ Words that were listed above will be listed one by one. You should choose the ac
 
                 if action == 'i':  # add word to ignore
                     Words.add_word_to_ignore(word=word)
+                    break
 
                 if action == 'e':  # edit and add to dictionary
                     Words.edit_and_add2dictionary(word=word)
